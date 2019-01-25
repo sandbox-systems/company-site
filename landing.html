@@ -4,27 +4,69 @@
   <meta charset="utf-8">
   <title>Sandbox Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" media="screen" href="css/style.css">
   <style>
+
     #logo
     {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100%;
+      height: auto;
+      padding-left: 15%;
+      padding-right: 15%;
+    }
+
+    #navbar-logo
+    {
+      width: 15%;
+      height: 15%;
+    }
+
+    .navbar
+    {
+      background-color: rebeccapurple !important;
+    }
+
+    .nav-item
+    {
+
     }
   </style>
+  <script>
+    var quote = "";
+    function qotd()
+    {
+      axios.get("http://quotes.rest/qod.json")
+      .then(function (response) {
+        quote = response.contents.quotes[0];
+        document.getElementById('qotd').innerHTML = quote;
+      })
+        .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+    }
+
+    window.onload() = qotd();
+  </script>
 </head>
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">
+      <image src="images/white-logo.svg" alt="Sandbox_Logo"  id="navbar-logo">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -32,33 +74,19 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
 
-<div id="particles-js">
-  <div id="logo">
-    <image src="images/purplelogo.svg" alt="Sandbox_Logo">
+  <div id="particles-js">
+    <div>
+      <image src="images/purplelogo.svg" alt="Sandbox_Logo"  id="logo">
+    </div>
+    <div id="qotd"></div>
   </div>
-</div>
 
 <script src="js/particles.js"></script>
 <script src="js/app.js"></script>
